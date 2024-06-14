@@ -35,6 +35,30 @@ const Dummy_Expenses = [
     amount: 29.99,
     date: new Date("2024-01-15"),
   },
+  {
+    id: "e6",
+    title: "A pair of trousers",
+    amount: 119.99,
+    date: new Date("2021-03-24"),
+  },
+  {
+    id: "e7",
+    title: "A pair of apples",
+    amount: 19.99,
+    date: new Date("2023-05-30"),
+  },
+  {
+    id: "e8",
+    title: "A book",
+    amount: 39.99,
+    date: new Date("2024-01-18"),
+  },
+  {
+    id: "e9",
+    title: "Another book",
+    amount: 29.99,
+    date: new Date("2024-01-15"),
+  },
 ];
 
 export default function ExpensesOutput({ expenses, expensePeriod }) {
@@ -49,7 +73,9 @@ export default function ExpensesOutput({ expenses, expensePeriod }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    paddingBottom: 0,
+    paddingTop: 24,
+    paddingHorizontal: 24,
     backgroundColor: Constants.colors.primary700,
   },
 });

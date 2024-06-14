@@ -1,13 +1,12 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet, Text, View } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 import ManageExpense from "./screens/manageExpense";
 import RecentExpenses from "./screens/recentExpenses";
 import AllExpenses from "./screens/allExpenses";
 import Constants from "./constants/styles";
-import { MaterialIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -51,7 +50,7 @@ function ExpenseOverview() {
 export default function App() {
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Expenses Overview">
           <Stack.Screen name="Manage Expense" component={ManageExpense} />

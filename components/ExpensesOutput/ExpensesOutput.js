@@ -2,8 +2,9 @@ import { StyleSheet, View } from "react-native";
 import React from "react";
 import ExpensesSummary from "./ExpensesSummary";
 import ExpensesList from "./ExpensesList";
+import Constants from "./../../constants/styles";
 
-const DummyExpenses = [
+const Dummy_Expenses = [
   {
     id: "e1",
     title: "A pair of shoes",
@@ -38,11 +39,17 @@ const DummyExpenses = [
 
 export default function ExpensesOutput({ expenses, expensePeriod }) {
   return (
-    <View>
-      <ExpensesSummary expenses={DummyExpenses} periodName={expensePeriod} />
-      <ExpensesList expenses={DummyExpenses} />
+    <View style={styles.container}>
+      <ExpensesSummary expenses={Dummy_Expenses} periodName={expensePeriod} />
+      <ExpensesList expenses={Dummy_Expenses} />
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 24,
+    backgroundColor: Constants.colors.primary700,
+  },
+});

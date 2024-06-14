@@ -40,7 +40,7 @@ function ExpenseOverview() {
           title: "All Expenses",
           tabBarLabel: "All Expenses",
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="hourglass-full" size={size} color={color} />
+            <MaterialIcons name="calendar-month" size={size} color={color} />
           ),
         }}
       />

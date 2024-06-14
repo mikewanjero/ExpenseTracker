@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-export default function manageExpense() {
+export default function ManageExpense() {
   return (
     <View>
       <Text>manageExpense screen</Text>

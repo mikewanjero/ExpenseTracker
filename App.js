@@ -3,16 +3,16 @@ import { StatusBar } from "expo-status-bar";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StyleSheet, Text, View } from "react-native";
-import manageExpense from "./screens/manageExpense";
-import recentExpenses from "./screens/recentExpenses";
-import allExpenses from "./screens/allExpenses";
+import ManageExpense from "./screens/manageExpense";
+import RecentExpenses from "./screens/recentExpenses";
+import AllExpenses from "./screens/allExpenses";
 import Constants from "./constants/styles";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-function expenseOverview() {
+function ExpenseOverview() {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -24,7 +24,7 @@ function expenseOverview() {
     >
       <Tab.Screen
         name="Recent Expenses"
-        component={recentExpenses}
+        component={RecentExpenses}
         options={{
           title: "Recent Expenses",
           tabBarLabel: "Recent Expenses",
@@ -33,7 +33,17 @@ function expenseOverview() {
           ),
         }}
       />
-      <Tab.Screen name="All Expenses" component={allExpenses} />
+      <Tab.Screen
+        name="All Expenses"
+        component={AllExpenses}
+        options={{
+          title: "All Expenses",
+          tabBarLabel: "All Expenses",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="hourglass-full" size={size} color={color} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
@@ -44,10 +54,10 @@ export default function App() {
       <StatusBar style="auto" />
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Expenses Overview">
-          <Stack.Screen name="Manage Expense" component={manageExpense} />
+          <Stack.Screen name="Manage Expense" component={ManageExpense} />
           <Stack.Screen
             name="Expenses Overview"
-            component={expenseOverview}
+            component={ExpenseOverview}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

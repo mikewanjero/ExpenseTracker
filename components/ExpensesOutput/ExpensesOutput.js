@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
 import ExpensesSummary from "./ExpensesSummary";
-import ExpensesList from "./expensesList";
+import ExpensesList from "./ExpensesList";
 
 const DummyExpenses = [
   {
@@ -29,7 +29,7 @@ const DummyExpenses = [
     date: new Date("2024-01-18"),
   },
   {
-    id: "e1",
+    id: "e5",
     title: "Another book",
     amount: 29.99,
     date: new Date("2024-01-15"),
@@ -40,7 +40,7 @@ export default function ExpensesOutput({ expenses, expensePeriod }) {
   return (
     <View>
       <ExpensesSummary expenses={DummyExpenses} periodName={expensePeriod} />
-      <ExpensesList />
+      <ExpensesList expenses={DummyExpenses} />
     </View>
   );
 }

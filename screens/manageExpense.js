@@ -1,7 +1,8 @@
 import { useLayoutEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import IconButton from "../UI/IconButton";
 import Constants from "./../constants/styles";
+import CustomButton from "../UI/CustomButton";
 
 export default function ManageExpense({ route, navigation }) {
   const editedExpenseID = route.params?.expenseID;
@@ -15,8 +16,20 @@ export default function ManageExpense({ route, navigation }) {
 
   function DeleteExpressHandler() {}
 
+  function CancelHandler() {}
+
+  function ConfirmHandler() {}
+
   return (
     <View style={styles.container}>
+      <View style={styles.buttons}>
+        <CustomButton mode="flat" onPress={CancelHandler} style={styles.button}>
+          Cancel
+        </CustomButton>
+        <CustomButton onPress={ConfirmHandler} style={styles.button}>
+          {isEditing ? "Update" : "Add"}
+        </CustomButton>
+      </View>
       {isEditing && (
         <View style={styles.DeleteContainer}>
           <IconButton
@@ -36,6 +49,15 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     backgroundColor: Constants.colors.primary800,
+  },
+  buttons: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  button: {
+    minWidth: 100,
+    marginHorizontal: 8,
   },
   DeleteContainer: {
     marginTop: 20,

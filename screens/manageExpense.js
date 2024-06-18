@@ -1,5 +1,7 @@
 import { useLayoutEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import IconButton from "../UI/IconButton";
+import Constants from "./../constants/styles";
 
 export default function ManageExpense({ route, navigation }) {
   const editedExpenseID = route.params?.expenseID;
@@ -11,22 +13,34 @@ export default function ManageExpense({ route, navigation }) {
     });
   }, [navigation, isEditing]);
 
+  function DeleteExpressHandler() {}
+
   return (
-    <View style={styles.ExpContainer}>
-      <Text style={styles.ExpText}>Manage Expense screen</Text>
+    <View style={styles.container}>
+      {isEditing && (
+        <View style={styles.DeleteContainer}>
+          <IconButton
+            icon="trash"
+            color={Constants.colors.error500}
+            size={36}
+            onBtnPress={DeleteExpressHandler}
+          />
+        </View>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  ExpContainer: {
+  container: {
     flex: 1,
-    margin: 20,
-    padding: 10,
-    alignItems: "row",
+    padding: 24,
+    backgroundColor: Constants.colors.primary800,
   },
-  ExpText: {
-    fontSize: 16,
-    fontStyle: "italic",
+  DeleteContainer: {
+    marginTop: 20,
+    paddingTop: 10,
+    borderTopWidth: 2,
+    borderTopColor: Constants.colors.error500,
   },
 });

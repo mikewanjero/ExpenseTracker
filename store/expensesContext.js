@@ -55,6 +55,24 @@ const Dummy_Expenses = [
     amount: 29.99,
     date: new Date("2024-01-15"),
   },
+  {
+    id: "e10",
+    title: "Book Vol 2",
+    amount: 29.99,
+    date: new Date("2024-06-20"),
+  },
+  {
+    id: "e11",
+    title: "Wuthering Heights",
+    amount: 29.99,
+    date: new Date("2024-06-16"),
+  },
+  {
+    id: "e12",
+    title: "A Handmaid's Tale",
+    amount: 29.99,
+    date: new Date("2024-06-18"),
+  },
 ];
 
 export const ExpensesContext = createContext({
@@ -86,7 +104,7 @@ function ExpensesReducer(state, action) {
 }
 
 export default function ExpensesContextProvider({ children }) {
-  const [expensesState, dispatch] = useReducer(ExpensesReducer);
+  const [expensesState, dispatch] = useReducer(ExpensesReducer, Dummy_Expenses);
 
   function addExpense(expenseData) {
     dispatch({ type: "ADD", payload: expenseData });
@@ -100,5 +118,16 @@ export default function ExpensesContextProvider({ children }) {
     dispatch({ type: "UPDATE", payload: { id: id, expenseData: expenseData } });
   }
 
-  return <ExpensesContext.Provider>{children}</ExpensesContext.Provider>;
+  const value = {
+    expenses: expensesState,
+    addExpense: addExpense,
+    deleteExpense: deleteExpense,
+    updateExpense: updateExpense,
+  };
+
+  return (
+    <ExpensesContext.Provider value={value}>
+      {children}
+    </ExpensesContext.Provider>
+  );
 }

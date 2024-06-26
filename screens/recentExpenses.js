@@ -10,7 +10,7 @@ export default function RecentExpenses() {
     const today = new Date();
     const last7days = getDateMinusDays(today, 7);
 
-    return expense.date > last7days;
+    return expense.date >= last7days && expense.date <= today;
   });
 
   return (

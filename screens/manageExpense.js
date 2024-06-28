@@ -1,8 +1,9 @@
 import { useContext, useLayoutEffect } from "react";
 import { StyleSheet, View } from "react-native";
+
 import IconButton from "../UI/IconButton";
-import Constants from "./../constants/styles";
 import CustomButton from "../UI/CustomButton";
+import Constants from "./../constants/styles";
 import { ExpensesContext } from "../store/expensesContext";
 
 export default function ManageExpense({ route, navigation }) {
@@ -17,19 +18,19 @@ export default function ManageExpense({ route, navigation }) {
     });
   }, [navigation, isEditing]);
 
-  function DeleteExpressHandler() {
+  function deleteExpenseHandler() {
     expensesCtx.deleteExpense(editedExpenseID);
     navigation.goBack();
   }
 
-  function CancelHandler() {
+  function cancelHandler() {
     navigation.goBack();
   }
 
-  function ConfirmHandler() {
+  function confirmHandler() {
     if (isEditing) {
       expensesCtx.updateExpense(editedExpenseID, {
-        title: "Testing",
+        title: "Test!!!!",
         amount: 29.99,
         date: new Date("2024-06-25"),
       });
@@ -47,23 +48,23 @@ export default function ManageExpense({ route, navigation }) {
     <View style={styles.container}>
       <View style={styles.buttons}>
         <CustomButton
-          mode="flat"
-          onButtonPress={CancelHandler}
           style={styles.button}
+          mode="flat"
+          onButtonPress={cancelHandler}
         >
           Cancel
         </CustomButton>
-        <CustomButton onButtonPress={ConfirmHandler} style={styles.button}>
+        <CustomButton style={styles.button} onButtonPress={confirmHandler}>
           {isEditing ? "Update" : "Add"}
         </CustomButton>
       </View>
       {isEditing && (
-        <View style={styles.DeleteContainer}>
+        <View style={styles.deleteContainer}>
           <IconButton
             icon="trash"
             color={Constants.colors.error500}
             size={36}
-            onBtnPress={DeleteExpressHandler}
+            onBtnPress={deleteExpenseHandler}
           />
         </View>
       )}
@@ -83,13 +84,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    minWidth: 100,
+    minWidth: 120,
     marginHorizontal: 8,
   },
-  DeleteContainer: {
-    marginTop: 20,
-    paddingTop: 10,
+  deleteContainer: {
+    marginTop: 16,
+    paddingTop: 8,
     borderTopWidth: 2,
-    borderTopColor: Constants.colors.error500,
+    borderTopColor: Constants.colors.primary200,
+    alignItems: "center",
   },
 });

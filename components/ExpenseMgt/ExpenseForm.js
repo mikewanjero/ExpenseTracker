@@ -2,12 +2,19 @@ import { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Input from "./Input";
 import CustomButton from "../../UI/CustomButton";
+import { getFormattedDate } from "../../util/date";
 
-export default function ExpenseForm({ onCancel, onSubmit, submitButtonLabel }) {
+export default function ExpenseForm({
+  onCancel,
+  onSubmit,
+  submitButtonLabel,
+  AddUpdateValues,
+}) {
+  //Keeps state so you can see values when you want to edit them.
   const [inputs, setInputs] = useState({
-    amount: "",
-    date: "",
-    title: "",
+    amount: AddUpdateValues ? AddUpdateValues.amount.toString() : "",
+    date: AddUpdateValues ? getFormattedDate(AddUpdateValues.date) : "",
+    title: AddUpdateValues ? AddUpdateValues.title : "",
   });
 
   function changeInput(inputIdentifier, enteredValue) {

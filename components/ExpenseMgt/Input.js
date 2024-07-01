@@ -1,7 +1,7 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import Constants from "./../../constants/styles";
 
-export default function Input({ label, textInputConfig }) {
+export default function Input({ label, style, textInputConfig }) {
   // Allowing style array to have more than one style
   const inputStyles = [styles.input];
 
@@ -10,7 +10,7 @@ export default function Input({ label, textInputConfig }) {
   }
 
   return (
-    <View style={styles.inputContainer}>
+    <View style={[styles.inputContainer, style]}>
       <Text style={styles.label}>{label}</Text>
       <TextInput {...textInputConfig} style={styles.input} />
     </View>

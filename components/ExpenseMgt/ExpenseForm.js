@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Alert } from "react-native";
 import Input from "./Input";
 import CustomButton from "../../UI/CustomButton";
 import { getFormattedDate } from "../../util/date";
+import Constants from "./../../constants/styles";
 
 export default function ExpenseForm({
   onCancel,
@@ -10,18 +11,27 @@ export default function ExpenseForm({
   submitButtonLabel,
   AddUpdateValues,
 }) {
-  //Keeps state so you can see values when you want to edit them.
+  //Keeps state so you can see values when you want to edit them, checks validity of values
   const [inputs, setInputs] = useState({
-    amount: AddUpdateValues ? AddUpdateValues.amount.toString() : "",
-    date: AddUpdateValues ? getFormattedDate(AddUpdateValues.date) : "",
-    title: AddUpdateValues ? AddUpdateValues.title : "",
+    amount: {
+      value: AddUpdateValues ? AddUpdateValues.amount.toString() : "",
+      isValid: true,
+    },
+    date: {
+      value: AddUpdateValues ? getFormattedDate(AddUpdateValues.date) : "",
+      isValid: true,
+    },
+    title: {
+      value: AddUpdateValues ? AddUpdateValues.title : "",
+      isValid: true,
+    },
   });
 
   function changeInput(inputIdentifier, enteredValue) {
     setInputs((currentInputs) => {
       return {
         ...currentInputs,
-        [inputIdentifier]: enteredValue,
+        [inputIdentifier]: { value: enteredValue, isValid: true },
       };
     });
   }
@@ -29,9 +39,9 @@ export default function ExpenseForm({
   function submitHandler() {
     //function to input data.
     const expenseData = {
-      amount: +inputs.amount,
-      date: new Date(inputs.date),
-      title: inputs.title,
+      amount: +inputs.amount.value,
+      date: new Date(inputs.date.value),
+      title: inputs.title.value,
     };
 
     //Adding Validation for all 3 input items.
@@ -45,48 +55,64 @@ export default function ExpenseForm({
 
     //Conditional checks for validation
     if (!amountisValid || !dateisValid || !titleisValid) {
-      //Validation feedback
-      Alert.alert("Invalid Input", "Please check your values");
+      //Updating state if sth invalid was entered
+      setInputs((currentInputs) => {
+        return {
+          amount: { value: currentInputs.amount.value, isValid: amountisValid },
+          date: { value: currentInputs.date.value, isValid: dateisValid },
+          title: { value: currentInputs.title.value, isValid: titleisValid },
+        };
+      });
       return;
     }
 
     onSubmit(expenseData);
   }
 
+  //Helper function to check if any of the inputs is invalid
+  const formIsInvalid =
+    !inputs.amount.isValid || !inputs.date.isValid || !inputs.title.isValid;
+
   return (
     <View style={styles.form}>
       <Text style={styles.text}>New Expense</Text>
       <View style={styles.row}>
         <Input
-          label={"Amount"}
+          label="Amount"
           textInputConfig={{
             keyboardType: "decimal-pad",
             onChangeText: changeInput.bind(this, "amount"),
-            value: inputs.amount,
+            value: inputs.amount.value,
           }}
+          inValid={!inputs.date.isValid}
           style={styles.rowInput}
         />
         <Input
-          label={"Date"}
+          label="Date"
           textInputConfig={{
             placeholder: "YYYY-MM-DD",
             maxLength: 10,
             onChangeText: changeInput.bind(this, "date"),
-            value: inputs.date,
+            value: inputs.date.value,
           }}
+          inValid={!inputs.amount.isValid}
           style={styles.rowInput}
         />
       </View>
       <Input
-        label={"Title"}
+        label="Title"
         textInputConfig={{
           multiline: true,
           onChangeText: changeInput.bind(this, "title"),
-          value: inputs.title,
+          value: inputs.title.value,
           // autoCorrect: false, //default is true
           // autoCapitalize: 'sentences', //default is sentences
         }}
+        inValid={!inputs.title.isValid}
       />
+      {formIsInvalid && (
+        <Text style={styles.errorText}>Wrong Input - Check your values!</Text>
+      )}
       <View style={styles.buttons}>
         <CustomButton
           style={styles.button}
@@ -121,7 +147,13 @@ const styles = StyleSheet.create({
   rowInput: {
     flex: 1,
   },
-
+  errorText: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    margin: 10,
+    color: Constants.colors.error500,
+  },
   buttons: {
     flexDirection: "row",
     justifyContent: "center",

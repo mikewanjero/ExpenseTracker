@@ -23,11 +23,13 @@ export default function ExpenseForm() {
       />
       <Input
         label={"Description"}
-        textInputConfig={{
-          multiline: true,
-          // autoCorrect: false, //default is true
-          // autoCapitalize: 'sentences', //default is sentences
-        }}
+        textInputConfig={
+          {
+            //   multiline: true,
+            // autoCorrect: false, //default is true
+            // autoCapitalize: 'sentences', //default is sentences
+          }
+        }
       />
     </View>
   );

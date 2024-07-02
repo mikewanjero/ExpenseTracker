@@ -56,6 +56,7 @@ export default function ExpenseForm({
     //Conditional checks for validation
     if (!amountisValid || !dateisValid || !titleisValid) {
       //Updating state if sth invalid was entered
+      // Alert.alert('Invalid input', 'Please check your input values');
       setInputs((currentInputs) => {
         return {
           amount: { value: currentInputs.amount.value, isValid: amountisValid },
@@ -75,7 +76,7 @@ export default function ExpenseForm({
 
   return (
     <View style={styles.form}>
-      <Text style={styles.text}>New Expense</Text>
+      <Text style={styles.text}>Your Expense</Text>
       <View style={styles.row}>
         <Input
           label="Amount"

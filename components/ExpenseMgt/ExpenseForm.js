@@ -37,6 +37,7 @@ export default function ExpenseForm({
   }
 
   function submitHandler() {
+    //function to input data
     const expenseData = {
       amount: +inputs.amount.value,
       date: new Date(inputs.date.value),

@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
 import Constants from "./../../constants/styles";
 
 export default function ExpensesSummary({ expenses, periodName }) {

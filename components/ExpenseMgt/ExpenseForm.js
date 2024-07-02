@@ -37,31 +37,24 @@ export default function ExpenseForm({
   }
 
   function submitHandler() {
-    //function to input data.
     const expenseData = {
       amount: +inputs.amount.value,
       date: new Date(inputs.date.value),
       title: inputs.title.value,
     };
 
-    //Adding Validation for all 3 input items.
-
-    //Checking if amount is a number and more than 0.
-    const amountisValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
-    //Checking if date of right format
-    const dateisValid = expenseData.date.toString() !== "Invalid Date";
-    //Checking if title is of right format
-    const titleisValid = expenseData.title.trim().length > 0;
-
+    //Validation for all 3 input items
+    const amountIsValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
+    const dateIsValid = expenseData.date.toString() !== "Invalid Date";
+    const titleIsValid = expenseData.title.trim().length > 0;
     //Conditional checks for validation
-    if (!amountisValid || !dateisValid || !titleisValid) {
-      //Updating state if sth invalid was entered
-      // Alert.alert('Invalid input', 'Please check your input values');
+    if (!amountIsValid || !dateIsValid || !titleIsValid) {
+      //Reseting values to input again.
       setInputs((currentInputs) => {
         return {
-          amount: { value: currentInputs.amount.value, isValid: amountisValid },
-          date: { value: currentInputs.date.value, isValid: dateisValid },
-          title: { value: currentInputs.title.value, isValid: titleisValid },
+          amount: { value: currentInputs.amount.value, isValid: amountIsValid },
+          date: { value: currentInputs.date.value, isValid: dateIsValid },
+          title: { value: currentInputs.title.value, isValid: titleIsValid },
         };
       });
       return;

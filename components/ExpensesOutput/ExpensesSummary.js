@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   },
   sum: {
     fontSize: 16,
+    fontWeight: "bold",
     color: Constants.colors.primary500,
   },
 });

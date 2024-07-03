@@ -1,7 +1,7 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import Constants from "./../../constants/styles";
 
-export default function Input({ label, style, textInputConfig, invalid }) {
+export default function Input({ label, style, textInputConfig, inValid }) {
   // Allowing style array to have more than one style
   const inputStyles = [styles.input];
 
@@ -10,13 +10,13 @@ export default function Input({ label, style, textInputConfig, invalid }) {
   }
 
   //Adding an item to the list if the last one typed was previously invalid.
-  if (invalid) {
+  if (inValid) {
     inputStyles.push(styles.invalidInput);
   }
 
   return (
     <View style={[styles.inputContainer, style]}>
-      <Text style={[styles.label, invalid && styles.invalidLabel]}>
+      <Text style={[styles.label, inValid && styles.invalidLabel]}>
         {label}
       </Text>
       <TextInput {...textInputConfig} style={inputStyles} />

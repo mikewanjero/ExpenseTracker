@@ -10,6 +10,7 @@ export default function RecentExpenses() {
   useEffect(() => {
     async function obtainExpenses() {
       const expenses = await getExpenses();
+      expensesCtx.setExpenses(expenses);
     }
 
     obtainExpenses();
@@ -26,7 +27,7 @@ export default function RecentExpenses() {
     <ExpensesOutput
       expenses={recentExpenses}
       expensePeriod="Last 7 Days"
-      fallbacktext={"No expenses in the last 7 Days"}
+      fallbacktext="No expenses in the last 7 Days"
     />
   );
 }

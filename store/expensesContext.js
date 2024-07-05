@@ -8,13 +8,14 @@ export const ExpensesContext = createContext({
   updateExpense: (id, { title, amount, date }) => {},
 });
 
+// State of data when adding, displaying, updating and deleting
 function ExpensesReducer(state, action) {
   switch (action.type) {
     case "ADD":
-      const id = new Date().toString() + Math.random().toString();
-      return [{ ...action.payload, id: id }, ...state];
+      return [...action.payload, ...state];
     case "SET":
-      return action.payload;
+      const inverted = action.payload.reverse();
+      return inverted;
     case "UPDATE":
       const updatableExpenseIndex = state.findIndex(
         (expense) => expense.id === action.payload.id
@@ -37,8 +38,8 @@ function ExpensesReducer(state, action) {
 export default function ExpensesContextProvider({ children }) {
   const [expensesState, dispatch] = useReducer(ExpensesReducer, []);
 
-  //Highlighting parameters in the brackets allows them to be viewed
-  //on the screen after the action, not just backend alone
+  /*Highlighting parameters in the brackets allows them to be viewed
+  on the screen after the action, not just backend alone */
   function addExpense(expenseData) {
     dispatch({ type: "ADD", payload: expenseData });
   }

@@ -32,3 +32,11 @@ export async function getExpenses() {
 
   return expenses;
 }
+//Update and Delete helper functions(backend)
+export function updateExpense(id, expenseData) {
+  return axios.put(BACKEND_URL + `/expenses/${id}.json`, expenseData);
+}
+
+export function deleteExpense(id) {
+  return axios.delete(BACKEND_URL + `/expenses/${id}.json`);
+}

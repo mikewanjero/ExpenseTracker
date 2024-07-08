@@ -12,9 +12,9 @@ export const ExpensesContext = createContext({
 function ExpensesReducer(state, action) {
   switch (action.type) {
     case "ADD":
-      return [...action.payload, ...state];
+      return [action.payload, ...state];
     case "SET":
-      const inverted = action.payload.reverse();
+      const inverted = action.payload.reverse(); //reverse to maintain order when displaying list
       return inverted;
     case "UPDATE":
       const updatableExpenseIndex = state.findIndex(
@@ -29,7 +29,7 @@ function ExpensesReducer(state, action) {
       updatedExpenses[updatableExpenseIndex] = updatedItem;
       return updatedExpenses;
     case "DELETE":
-      return state.filter((expense) => expense.id != action.payload);
+      return state.filter((expense) => expense.id !== action.payload);
     default:
       return state;
   }
